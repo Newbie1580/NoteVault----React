@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --color-accent: #6366f1;
+  --color-accent-hover: #4f46e5;
+  --color-accent-light: #eef2ff;
+  --color-accent-muted: rgba(99, 102, 241, 0.12);
+
+  --color-danger: #ef4444;
+  --color-danger-hover: #dc2626;
+  --color-danger-light: #fef2f2;
+
+  --color-success: #22c55e;
+
+  --color-surface: #ffffff;
+  --color-surface-secondary: #f9fafb;
+  --color-sidebar: #fafafa;
+
+  --animate-toast-in: toast-in 0.3s ease;
+  --animate-toast-out: toast-out 0.3s ease forwards;
+  --animate-loader-pulse: loader-pulse 0.8s ease-in-out infinite alternate;
+
+  @keyframes toast-in {
+    from { opacity: 0; transform: translateY(10px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes toast-out {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(10px); pointer-events: none; }
+  }
+  @keyframes loader-pulse {
+    from { opacity: 0.3; transform: scaleY(0.6); }
+    to { opacity: 1; transform: scaleY(1); }
+  }
+}
+
+html {
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-surface-secondary);
+  color: var(--color-gray-800);
+  line-height: 1.6;
+  margin: 0;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Slim scrollbars like vanilla version */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-gray-300); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-gray-400); }
