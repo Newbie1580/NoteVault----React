@@ -134,7 +134,7 @@ function App() {
   }, [deleteTargetId, editorOpen, closeEditor, openEditor, expandSidebar, toggleCollapsed]);
 
   return (
-    <div className="flex min-h-screen bg-[#f9fafb]">
+    <div className="flex min-h-screen bg-surface-secondary">
       <Sidebar
         open={sidebarOpen}
         collapsed={collapsed}
@@ -161,13 +161,13 @@ function App() {
       {sidebarOpen && (
         <div
           onClick={() => setSidebarOpen(false)}
-          className="fixed inset-0 z-[90] bg-black/30 md:hidden"
+          className="fixed inset-0 z-90 bg-black/30 md:hidden"
         />
       )}
 
       <main
         className={`ml-0 flex min-h-screen w-full max-w-full min-w-0 flex-1 flex-col transition-[margin] duration-250 ${
-          collapsed ? 'md:ml-[68px] md:w-[calc(100%-68px)]' : 'md:ml-[260px] md:w-[calc(100%-260px)]'
+          collapsed ? 'md:ml-17 md:w-[calc(100%-68px)]' : 'md:ml-17 md:w-[calc(100%-260px)]'
         }`}
       >
         <Topbar

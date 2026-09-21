@@ -46,7 +46,7 @@ export default function EditorPanel({
         }`}
       />
       <div
-        className={`fixed top-0 right-0 z-210 flex h-screen w-[520px] max-w-full flex-col bg-white shadow-xl transition-transform duration-300 ${
+        className={`fixed top-0 right-0 z-210 flex h-screen w-130 max-w-full flex-col bg-white shadow-xl transition-transform duration-300 ${
           open ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -115,7 +115,7 @@ export default function EditorPanel({
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="cursor-pointer rounded-md border border-gray-200 bg-white px-2.5 py-[5px] text-[0.82rem] text-gray-700 outline-none focus:border-accent"
+                className="cursor-pointer rounded-md border border-gray-200 bg-white px-2.5 py-1.25 text-[0.82rem] text-gray-700 outline-none focus:border-accent"
               >
                 {Object.entries(CATEGORIES).map(([key, cat]) => (
                   <option key={key} value={key}>
