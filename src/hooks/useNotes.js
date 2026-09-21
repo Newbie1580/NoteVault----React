@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { apiCreate, apiDelete, apiGetAll, apiUpdate, normalizeNote } from '../api/notesApi';
 import { generateId } from '../utils/format';
 import { CATEGORIES } from '../constants/categories';
+import { SEED_NOTES } from '../constants/seedNotes';
 
 const LOCAL_KEY = 'notevault_local';
 
@@ -46,11 +47,12 @@ export function useNotes() {
     try {
       const raw = await apiGetAll();
       const list = Array.isArray(raw) ? raw : [];
-      setNotes([...list.map(normalizeNote), ...readLocal()]);
+      const apiNotes = list.map(normalizeNote).filter(Boolean);
+      setNotes([...apiNotes, ...SEED_NOTES, ...readLocal()]);
     } catch (err) {
       console.error(err);
       pushToast('Failed to load notes from API', 'error');
-      setNotes(readLocal());
+      setNotes([...SEED_NOTES, ...readLocal()]);
     } finally {
       setLoading(false);
     }

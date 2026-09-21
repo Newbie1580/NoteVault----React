@@ -34,7 +34,7 @@ export default function NotesGrid({ notes, loading, view, onOpen, onNewNote }) {
 
   if (view === 'list') {
     return (
-      <div className="flex flex-1 flex-col gap-2 px-4 py-5 md:px-6">
+      <div className="flex w-full max-w-full min-w-0 flex-1 flex-col gap-2 overflow-x-hidden px-4 py-5 md:px-6">
         {notes.map((note) => (
           <NoteCard key={note.id} note={note} layout="list" onOpen={onOpen} />
         ))}

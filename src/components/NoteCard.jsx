@@ -8,26 +8,25 @@ export default function NoteCard({ note, layout = 'grid', onOpen }) {
     return (
       <div
         onClick={() => onOpen(note.id)}
-        className={`flex cursor-pointer flex-row items-center gap-4 rounded-xl border bg-white px-[18px] py-3.5 transition duration-150 hover:-translate-y-px hover:border-gray-300 hover:shadow-md ${
+        className={`flex w-full max-w-full min-w-0 cursor-pointer flex-row items-center gap-3 overflow-hidden rounded-xl border bg-white px-[18px] py-3.5 transition duration-150 hover:-translate-y-px hover:border-gray-300 hover:shadow-md sm:gap-4 ${
           note.pinned ? 'border-accent bg-gradient-to-br from-[#fafafe] to-accent-light' : 'border-gray-200'
         } ${note.archived ? 'opacity-60' : ''}`}
       >
         <div className="flex min-w-0 flex-1 items-center gap-2">
-          <div className="mr-2 min-w-0 flex-1 truncate text-[0.95rem] font-semibold text-gray-900">
+          <div className="min-w-0 flex-1 truncate text-[0.95rem] font-semibold text-gray-900">
             {note.title || 'Untitled'}
           </div>
           {note.pinned && <i className="bi bi-pin-fill shrink-0 text-xs text-accent" />}
         </div>
-        <div className="hidden w-[40%] truncate text-[0.85rem] text-gray-500 md:block">
-          {note.content}
-        </div>
-        <div className="flex shrink-0 items-center gap-3">
+        <div className="flex min-w-0 shrink-0 items-center gap-2 sm:gap-3">
           <span
-            className={`rounded px-2 py-0.5 text-[0.72rem] font-semibold tracking-wide uppercase ${CATEGORY_BADGE_STYLES[note.category] || 'bg-gray-100 text-gray-500'}`}
+            className={`shrink-0 rounded px-2 py-0.5 text-[0.72rem] font-semibold tracking-wide whitespace-nowrap uppercase ${CATEGORY_BADGE_STYLES[note.category] || 'bg-gray-100 text-gray-500'}`}
           >
             {cat.label}
           </span>
-          <span className="text-xs text-gray-400">{fmtDate(note.updated)}</span>
+          <span className="hidden shrink-0 text-xs whitespace-nowrap text-gray-400 min-[420px]:block">
+            {fmtDate(note.updated)}
+          </span>
         </div>
       </div>
     );

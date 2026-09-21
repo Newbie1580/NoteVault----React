@@ -39,8 +39,18 @@ export async function apiDelete(id) {
   return true;
 }
 
-/** Normalize an API object into our note structure */
+/** True only for objects shaped like a NoteVault note (has data.title/content).
+ * Filters out dummy fixtures from the public demo API (phones, laptops, ...). */
+export function isNoteObject(obj) {
+  if (!obj || typeof obj !== 'object') return false;
+  const d = obj.data;
+  if (!d || typeof d !== 'object') return false;
+  return typeof d.title === 'string' || typeof d.content === 'string';
+}
+
+/** Normalize an API object into our note structure (null if not a real note) */
 export function normalizeNote(obj) {
+  if (!isNoteObject(obj)) return null;
   const d = obj.data || {};
   return {
     id: obj.id,

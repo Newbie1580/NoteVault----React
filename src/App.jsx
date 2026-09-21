@@ -27,6 +27,36 @@ function App() {
   const [editingId, setEditingId] = useState(null);
   const [deleteTargetId, setDeleteTargetId] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [collapsed, setCollapsed] = useState(() => {
+    try {
+      return localStorage.getItem('notevault_sidebar_collapsed') === '1';
+    } catch {
+      return false;
+    }
+  });
+
+  const toggleCollapsed = useCallback(() => {
+    setCollapsed((prev) => {
+      try {
+        localStorage.setItem('notevault_sidebar_collapsed', prev ? '0' : '1');
+      } catch {
+        // ignore
+      }
+      return !prev;
+    });
+  }, []);
+
+  const expandSidebar = useCallback(() => {
+    setCollapsed((prev) => {
+      if (!prev) return prev;
+      try {
+        localStorage.setItem('notevault_sidebar_collapsed', '0');
+      } catch {
+        // ignore
+      }
+      return false;
+    });
+  }, []);
 
   const editingNote = editingId
     ? (notes.find((n) => String(n.id) === String(editingId)) ?? null)
@@ -75,7 +105,7 @@ function App() {
     await store.deleteNote(id);
   }, [deleteTargetId, store, closeEditor]);
 
-  // Keyboard shortcuts (ported from vanilla): Esc, Ctrl/Cmd+N, Ctrl/Cmd+K
+  // Keyboard shortcuts (ported from vanilla): Esc, Ctrl/Cmd+N, Ctrl/Cmd+K, Ctrl/Cmd+B
   useEffect(() => {
     const handler = (e) => {
       if (e.key === 'Escape') {
@@ -89,17 +119,25 @@ function App() {
       }
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault();
-        document.getElementById('searchInput')?.focus();
+        expandSidebar();
+        requestAnimationFrame(() => {
+          document.getElementById('searchInput')?.focus();
+        });
+      }
+      if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
+        e.preventDefault();
+        toggleCollapsed();
       }
     };
     document.addEventListener('keydown', handler);
     return () => document.removeEventListener('keydown', handler);
-  }, [deleteTargetId, editorOpen, closeEditor, openEditor]);
+  }, [deleteTargetId, editorOpen, closeEditor, openEditor, expandSidebar, toggleCollapsed]);
 
   return (
     <div className="flex min-h-screen bg-[#f9fafb]">
       <Sidebar
         open={sidebarOpen}
+        collapsed={collapsed}
         counts={counts}
         filter={filter}
         category={category}
@@ -115,6 +153,8 @@ function App() {
         }}
         onNewNote={() => openEditor()}
         onClose={() => setSidebarOpen(false)}
+        onToggleCollapse={toggleCollapsed}
+        onExpand={expandSidebar}
       />
 
       {/* Mobile sidebar scrim */}
@@ -125,7 +165,11 @@ function App() {
         />
       )}
 
-      <main className="ml-0 flex min-h-screen flex-1 flex-col md:ml-[260px]">
+      <main
+        className={`ml-0 flex min-h-screen w-full max-w-full min-w-0 flex-1 flex-col transition-[margin] duration-250 ${
+          collapsed ? 'md:ml-[68px] md:w-[calc(100%-68px)]' : 'md:ml-[260px] md:w-[calc(100%-260px)]'
+        }`}
+      >
         <Topbar
           title={topbarTitle}
           view={view}
@@ -133,6 +177,8 @@ function App() {
           sort={sort}
           onSortChange={store.setSort}
           onOpenMenu={() => setSidebarOpen(true)}
+          collapsed={collapsed}
+          onToggleCollapse={toggleCollapsed}
         />
         <NotesGrid
           notes={filteredNotes}

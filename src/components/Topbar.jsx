@@ -1,7 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { SORT_OPTIONS } from '../constants/categories';
 
-export default function Topbar({ title, view, onViewChange, sort, onSortChange, onOpenMenu }) {
+export default function Topbar({
+  title,
+  view,
+  onViewChange,
+  sort,
+  onSortChange,
+  onOpenMenu,
+  collapsed,
+  onToggleCollapse,
+}) {
   const [sortOpen, setSortOpen] = useState(false);
   const sortRef = useRef(null);
 
@@ -23,6 +32,16 @@ export default function Topbar({ title, view, onViewChange, sort, onSortChange, 
       >
         <i className="bi bi-list" />
       </button>
+      {onToggleCollapse && (
+        <button
+          className="hidden cursor-pointer rounded-md p-1.5 text-base text-gray-400 transition hover:bg-gray-100 hover:text-gray-600 md:block"
+          onClick={onToggleCollapse}
+          aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          title={collapsed ? 'Expand sidebar (Ctrl+B)' : 'Collapse sidebar (Ctrl+B)'}
+        >
+          <i className={`bi ${collapsed ? 'bi-layout-sidebar-inset' : 'bi-layout-sidebar'}`} />
+        </button>
+      )}
       <div className="flex-1 text-[1.05rem] font-semibold text-gray-900">{title}</div>
       <div className="flex items-center gap-2">
         <div className="hidden rounded-lg bg-gray-100 p-0.5 min-[480px]:flex">
