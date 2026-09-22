@@ -19,7 +19,7 @@ function CountBadge({ count, active }) {
   const display = count > 99 ? '99+' : count;
   return (
     <span
-      className={`absolute -top-1 -right-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full px-1 text-[0.65rem] leading-none font-bold text-white shadow-sm ring-2 ring-white ${
+      className={`absolute -top-1 -right-1 flex h-4.5 min-w-4.5 items-center justify-center rounded-full px-1 text-[0.65rem] leading-none font-bold text-white shadow-sm ring-2 ring-white ${
         active ? 'bg-accent' : 'bg-gray-500'
       }`}
     >
@@ -31,7 +31,7 @@ function CountBadge({ count, active }) {
 function CountPill({ count, active }) {
   return (
     <span
-      className={`min-w-[22px] rounded-full px-[7px] py-px text-center text-[0.72rem] font-semibold ${
+      className={`min-w-5.5 rounded-full px-1.75 py-px text-center text-[0.72rem] font-semibold ${
         active ? 'bg-accent-muted text-accent' : 'bg-gray-200 text-gray-600'
       }`}
     >
@@ -58,7 +58,7 @@ export default function Sidebar({
   return (
     <aside
       className={`fixed top-0 left-0 z-100 flex h-screen shrink-0 flex-col border-r border-gray-200 bg-white transition-all duration-250 md:sticky ${
-        collapsed ? 'w-[68px]' : 'w-[260px]'
+        collapsed ? 'w-17' : 'w-65'
       } ${open ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}
     >
       <div
@@ -67,7 +67,7 @@ export default function Sidebar({
         }`}
       >
         <div className={`flex items-center gap-2.5 ${collapsed ? 'justify-center' : ''}`}>
-          <div className="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-lg bg-accent text-base text-white">
+          <div className="flex h-8.5 w-8.5 shrink-0 items-center justify-center rounded-lg bg-accent text-base text-white">
             <i className="bi bi-journal-text" />
           </div>
           {!collapsed && (
