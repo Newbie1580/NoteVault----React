@@ -48,7 +48,7 @@ export default function Topbar({
           <button
             onClick={() => onViewChange('grid')}
             title="Grid view"
-            className={`cursor-pointer rounded-md px-2.5 py-[5px] text-sm transition ${
+            className={`cursor-pointer rounded-md px-2.5 py-1.25 text-sm transition ${
               view === 'grid' ? 'bg-white text-gray-800 shadow-xs' : 'text-gray-400 hover:text-gray-600'
             }`}
           >
@@ -57,7 +57,7 @@ export default function Topbar({
           <button
             onClick={() => onViewChange('list')}
             title="List view"
-            className={`cursor-pointer rounded-md px-2.5 py-[5px] text-sm transition ${
+            className={`cursor-pointer rounded-md px-2.5 py-1.25 text-sm transition ${
               view === 'list' ? 'bg-white text-gray-800 shadow-xs' : 'text-gray-400 hover:text-gray-600'
             }`}
           >
@@ -76,7 +76,7 @@ export default function Topbar({
             <i className="bi bi-arrow-down-up" />
           </button>
           {sortOpen && (
-            <div className="absolute top-full right-0 z-150 mt-1.5 min-w-[180px] rounded-lg border border-gray-200 bg-white p-1.5 shadow-lg">
+            <div className="absolute top-full right-0 z-150 mt-1.5 min-w-45 rounded-lg border border-gray-200 bg-white p-1.5 shadow-lg">
               {SORT_OPTIONS.map((opt) => (
                 <button
                   key={opt.value}
