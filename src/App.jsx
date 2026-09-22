@@ -165,11 +165,7 @@ function App() {
         />
       )}
 
-      <main
-        className={`ml-0 flex min-h-screen w-full max-w-full min-w-0 flex-1 flex-col transition-[margin] duration-250 ${
-          collapsed ? 'md:ml-17 md:w-[calc(100%-68px)]' : 'md:ml-17 md:w-[calc(100%-260px)]'
-        }`}
-      >
+      <main className="flex min-h-screen min-w-0 flex-1 flex-col">
         <Topbar
           title={topbarTitle}
           view={view}

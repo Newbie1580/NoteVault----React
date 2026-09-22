@@ -57,7 +57,7 @@ export default function Sidebar({
 }) {
   return (
     <aside
-      className={`fixed top-0 left-0 z-100 flex h-screen flex-col border-r border-gray-200 bg-white transition-all duration-250 ${
+      className={`fixed top-0 left-0 z-100 flex h-screen shrink-0 flex-col border-r border-gray-200 bg-white transition-all duration-250 md:sticky ${
         collapsed ? 'w-[68px]' : 'w-[260px]'
       } ${open ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}
     >
